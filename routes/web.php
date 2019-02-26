@@ -12,7 +12,9 @@
 */
 Route::get('/',['as' => 'home', 'uses' => 'HomeController@index']);
 
-Route::get('/informacion_alumno', ['as' => 'informacion_alumno', 'uses' => 'ControllerPages@HomeStudentController']);
+Route::get('/home_admin',['as' => 'home_admin', 'uses' => 'RootController@index']);
+
+//Route::get('/informacion_alumno', ['as' => 'informacion_alumno', 'uses' => 'ControllerPages@HomeStudentController']);
 
 Auth::routes();
 
