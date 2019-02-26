@@ -9,6 +9,7 @@ Autores: Adrián López & Abril Barrera
 Instrucciones de instalación:
  - git clone
  - composer install
+ - npm install
  - crear .env 
  
   
