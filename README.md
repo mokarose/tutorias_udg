@@ -11,5 +11,6 @@ Instrucciones de instalación:
  - composer install
  - npm install
  - crear .env 
+ - ejecutamos dentro del proyecto "php artisan key:generate"
  
   
