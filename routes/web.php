@@ -15,7 +15,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/home_admin', ['uses' => 'RootController@index'])->name('home_admin');
 
-//Route::get('/informacion_alumno', ['as' => 'informacion_alumno', 'uses' => 'ControllerPages@HomeStudentController']);
+//Route::Auth();
+
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -24,7 +25,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::get('register_tutor',['uses' => 'RegisterController@showRegistrationTutorForm'])->name('register_tutor');
+Route::get('register_tutor',['uses' => 'Auth\RegisterController@showRegistrationTutorForm'])->name('register_tutor');
 Route::post('register', 'Auth\RegisterController@register');
 
 
