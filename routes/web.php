@@ -10,13 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Home Routes
 Route::get('/','HomeController@index')->name("home");
 Route::get('/home', 'HomeController@index');
 
-Route::get('/home_admin', ['uses' => 'RootController@index'])->name('home_admin');
+Route::get('/home_admin', ['uses' => 'RootController@index'])->name('home_admin')->middleware('verified');
+Route::get('/home_student', ['uses' => 'StudentController@index'])->name('home_student')->middleware('verified');
+Route::get('/home_tutor', ['uses' => 'TutorController@index'])->name('home_tutor')->middleware('verified');
 
-//Route::get('/informacion_alumno', ['as' => 'informacion_alumno', 'uses' => 'ControllerPages@HomeStudentController']);
 
+Auth::routes(['verify' => true]);
+
+/*
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -24,7 +30,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::get('register_tutor',['uses' => 'RegisterController@showRegistrationTutorForm'])->name('register_tutor');
+Route::get('register_tutor',['uses' => 'Auth\RegisterController@showRegistrationTutorForm'])->name('register_tutor');
 Route::post('register', 'Auth\RegisterController@register');
 
 
@@ -38,5 +44,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
+*/
 

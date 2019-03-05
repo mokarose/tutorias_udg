@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-
+use Illuminate\Support\Facades\Auth;
 class ResetPasswordController extends Controller
 {
     /*
@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,24 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function redirectTo(){
+        
+        // User role
+        $role = Auth::user(); 
+        
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return route('home_admin');
+                break;
+            case 'tutor':
+                    return route('home_tutor');
+                break; 
+            default:
+                    return route('home_student'); 
+                break;
+            }
     }
 }

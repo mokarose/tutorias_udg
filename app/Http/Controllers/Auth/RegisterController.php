@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;;
 class RegisterController extends Controller
 {
     /*
@@ -41,12 +43,43 @@ class RegisterController extends Controller
     }
 
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+    
+    public function redirectTo(){
+        
+        // User role
+        $role = Auth::user()->role; 
+        
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return route('home_admin');
+                break;
+            case 'tutor':
+                    return route('home_tutor');
+                break; 
+            default:
+                    return route('home_student'); 
+                break;
+            }
+    }
 
     public function showRegistrationTutorForm()
     {
         return view('auth.register_tutor');
     }
 
+    
     /**
      * Get a validator for an incoming registration request.
      *
