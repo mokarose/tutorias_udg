@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -33,24 +33,27 @@ class LoginController extends Controller
      * @return void
      */
 
-    public function authenticated($request , $user)
-    {
-        if($user->role=="admin")
-        {
-            return redirect()->route('home_admin') ;
-        }
-        else if($user->role=="tutor")
-        {
-            return redirect()->route('home_tutor') ;
-        }
-        else
-        {
-            return redirect()->route('home_student') ;
-        }
-    }
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectTo(){
+        
+        // User role
+        $role = Auth::user(); 
+        
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return route('home_admin');
+                break;
+            case 'tutor':
+                    return route('home_tutor');
+                break; 
+            default:
+                    return route('home_student'); 
+                break;
+            }
     }
 }

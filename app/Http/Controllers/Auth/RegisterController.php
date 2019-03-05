@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;;
 class RegisterController extends Controller
 {
     /*
@@ -55,22 +55,24 @@ class RegisterController extends Controller
                         ?: redirect($this->redirectPath());
     }
     
-    public function registered($request , $user)
-    {
-        if($user->role=="admin")
-        {
-            return redirect()->route('home_admin') ;
-        }
-        else if($user->role=="tutor")
-        {
-            return redirect()->route('home_tutor') ;
-        }
-        else
-        {
-            return redirect()->route('home_student') ;
-        }
+    public function redirectTo(){
+        
+        // User role
+        $role = Auth::user()->role; 
+        
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return route('home_admin');
+                break;
+            case 'tutor':
+                    return route('home_tutor');
+                break; 
+            default:
+                    return route('home_student'); 
+                break;
+            }
     }
-
 
     public function showRegistrationTutorForm()
     {
