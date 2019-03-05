@@ -32,6 +32,23 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    public function authenticated($request , $user)
+    {
+        if($user->role=="admin")
+        {
+            return redirect()->route('home_admin') ;
+        }
+        else if($user->role=="tutor")
+        {
+            return redirect()->route('home_tutor') ;
+        }
+        else
+        {
+            return redirect()->route('home_student') ;
+        }
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
