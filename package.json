@@ -24,8 +24,6 @@
         "vue-template-compiler": "^2.6.7"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.7.2",
-        "animate.css": "^3.7.0",
         "clean-cache": "^1.0.1"
     }
 }

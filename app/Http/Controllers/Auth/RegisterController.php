@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;;
+use Illuminate\Support\Facades\Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -55,13 +56,14 @@ class RegisterController extends Controller
                         ?: redirect($this->redirectPath());
     }
     
-    public function redirectTo(){
-        
+    public function redirectTo()
+    {
         // User role
         $role = Auth::user()->role; 
         
         // Check user role
-        switch ($role) {
+        switch ($role) 
+        {
             case 'admin':
                     return route('home_admin');
                 break;
@@ -71,7 +73,7 @@ class RegisterController extends Controller
             default:
                     return route('home_student'); 
                 break;
-            }
+        }
     }
 
     public function showRegistrationTutorForm()
