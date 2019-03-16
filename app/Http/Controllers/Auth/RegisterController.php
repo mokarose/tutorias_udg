@@ -58,12 +58,12 @@ class RegisterController extends Controller
     
     public function redirectTo()
     {
-        
         // User role
         $role = Auth::user()->role; 
         
         // Check user role
-        switch ($role) {
+        switch ($role) 
+        {
             case 'admin':
                     return route('home_admin');
                 break;
@@ -73,7 +73,7 @@ class RegisterController extends Controller
             default:
                     return route('home_student'); 
                 break;
-            }
+        }
     }
 
     public function showRegistrationTutorForm()
