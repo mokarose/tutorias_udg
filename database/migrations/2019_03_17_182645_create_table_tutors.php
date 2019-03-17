@@ -20,8 +20,9 @@ class CreateTableTutors extends Migration
             $table->string('career',50);
             $table->date('date');
             $table->string('G', 1);
+            $table->boolean('active_social_service')->default(0);
             $table->boolean('status')->default(1);
-            $table->foreign('user_email')->references('correo')->on('users')
+            $table->foreign('user_email')->references('email')->on('users')
             ->onUpdate('cascade');
         });
     }

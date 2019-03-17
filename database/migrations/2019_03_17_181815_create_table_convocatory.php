@@ -15,11 +15,12 @@ class CreateTableConvocatory extends Migration
     {
         Schema::create('convocatories', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('convocatory_email');
             $table->date('start');
             $table->date('end');
             $table->string('written');
             $table->boolean('status')->default(1);
-            $table->foreign('convocatory_email')->references('correo')->on('users')
+            $table->foreign('convocatory_email')->references('email')->on('users')
             ->onUpdate('cascade');
             $table->timestamps();
         });

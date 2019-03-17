@@ -15,12 +15,16 @@ class CreateTableCareers extends Migration
     {
         Schema::create('careers', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('id_division');
+            $table->integer('id_division')->unsigned();
             $table->string('description', 55);
             $table->timestamps();
-            $table->foreign('id_division')->references('id')->on('divisions')
-            ->onUpdate('cascade');
+            
         });
+
+        Schema::table('careers', function($table) {
+            $table->foreign('id_division')->references('id')->on('divisions')->onUpdate('cascade');
+        });
+     
     }
 
     /**

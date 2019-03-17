@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableClasess extends Migration
+class CreateTableClasses extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,14 @@ class CreateTableClasess extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('id_division');
-            $table->bigInteger('id_career');
+            $table->integer('id_division')->unsigned();
+            $table->integer('id_career')->unsigned();
             $table->string('description', 55);
             $table->timestamps();
-            $table->foreign('od_division')->references('id')->on('divisions')
+        });
+
+        Schema::table('classes', function($table) {
+            $table->foreign('id_division')->references('id')->on('divisions')
             ->onUpdate('cascade');
             $table->foreign('id_career')->references('id')->on('careers')
             ->onUpdate('cascade');

@@ -21,8 +21,7 @@ class CreateStudentsTable extends Migration
             $table->date('date');
             $table->string('G', 1);
             $table->boolean('status')->default(1);
-            $table->foreign('user_email')->references('correo')->on('users')
-            ->onUpdate('cascade');
+            $table->foreign('user_email')->references('email')->on('users')->onUpdate('cascade');
         });
     }
 
