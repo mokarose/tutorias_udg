@@ -26,3 +26,9 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
+use Illuminate\Support\Facades\Schema; //NEW: Import Schema
+
+function boot()
+{
+    Schema::defaultStringLength(191); //NEW: Increase StringLength
+}
