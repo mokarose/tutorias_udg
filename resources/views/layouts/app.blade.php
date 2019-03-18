@@ -48,3 +48,6 @@
     </div>
 </body>
 </html>
+
+<!-- Footer -->
+@include('layouts.footer')
