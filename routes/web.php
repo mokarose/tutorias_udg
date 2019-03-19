@@ -20,6 +20,12 @@ Route::get('/home_student', ['uses' => 'StudentController@index'])->name('home_s
 Route::get('/home_tutor', ['uses' => 'TutorController@index'])->name('home_tutor')->middleware('verified');
 
 
+
+//Convocatory
+Route::get('/convocatory', ['uses' => 'ConvocatoryController@create'])->name('convocatory.create')->middleware('verified');
+Route::post('/convocatory', ['uses' => 'ConvocatoryController@store'])->name('convocatory.create')->middleware('verified');
+
+
 Auth::routes(['verify' => true]);
 
 /*

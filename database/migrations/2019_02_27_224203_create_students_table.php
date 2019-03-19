@@ -14,14 +14,17 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->string('user_email');
+            $table->integer('user_id')->unsigned();
             $table->string('route_picture');
             $table->string('hobby',255);
             $table->string('career',50);
             $table->date('date');
             $table->string('G', 1);
             $table->boolean('status')->default(1);
-            $table->foreign('user_email')->references('email')->on('users')->onUpdate('cascade');
+        });
+
+        Schema::table('students', function($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
