@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('route_picture');
             $table->string('hobby',255);
+            $table->integer('cellphone');
             $table->string('career',50);
             $table->date('date');
             $table->string('G', 1);

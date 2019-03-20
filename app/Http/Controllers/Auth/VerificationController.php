@@ -40,6 +40,13 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
+    public function showTutor(Request $request)
+    {
+        return $request->user()->hasVerifiedEmail()
+                        ? redirect($this->redirectPath())
+                        : view('auth.verify_tutor');
+    }
+
     public function redirectTo(){
         
         // User role

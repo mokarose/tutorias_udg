@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Convocatory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +56,15 @@ class RegisterController extends Controller
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
+
+    public function registerTutor(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return back()->with('Registered', 'You have registered as a tutor, the administrator confirms your request');
+    }
     
     public function redirectTo()
     {
@@ -78,7 +88,14 @@ class RegisterController extends Controller
 
     public function showRegistrationTutorForm()
     {
-        return view('auth.register_tutor');
+        if(Convocatory::ShowActive())
+        {
+            return view('auth.register_tutor');
+        }
+        else
+        {
+            abort(404, "This page has not been created yet");
+        }
     }
 
     
@@ -93,8 +110,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'student_code' => ['required', 'max:50', 'min:9'],
+            'password' => ['required', 'string', 'min:6', 'confirmed']
         ]);
     }
 
@@ -109,8 +125,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'student_code' => $data['student_code'],
+            'password' => Hash::make($data['password'])
         ]);
     }
 }

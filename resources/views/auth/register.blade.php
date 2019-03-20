@@ -41,20 +41,6 @@
                             @endif
                         </div>
 
-                        <!-- Student Code -->
-                        <div class="form-group">
-                            <label for="student_code" class="col-form-label">{{ __('Student Code') }}</label>
-                            <input id="student_code" type="number"
-                                class="form-control{{ $errors->has('student_code') ? ' is-invalid' : '' }}" name="student_code"
-                                value="{{ old('student_code') }}" required autofocus>
-    
-                            @if ($errors->has('student_code'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('student_code') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-
                         <!-- Password -->
                         <div class="form-group">
                             <label for="password" class="col-form-label">{{ __('Password') }}</label>

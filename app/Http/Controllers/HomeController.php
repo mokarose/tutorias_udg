@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Convocatory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
@@ -15,6 +16,8 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+
+
 
     /**
      * Show the application dashboard.

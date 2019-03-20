@@ -35,19 +35,32 @@
             @endauth
 
             @guest
-            <div class="d-flex ml-auto">
+            <div class="ml-auto d-md-flex">
+
                 <div class="nav-item">
-                    <a href="{{ route('login') }}"><i class="fe fe-lock"></i>
-                        {{ __('Login') }}</a>
+                    <a href="{{ route('login') }}">
+                        <i class="fe fe-lock"></i>{{ __('Login') }}
+                    </a>
                     
                 </div>
 
                 <div class="nav-item">
                     <a href="{{ route('register') }}"><i class="fe fe-edit-2"></i>
-                        {{ __('Register') }}</a>
+                        {{ __('Register') }}
+                    </a>
                         
                 </div>
+
+                @if($convocatory)
+                    <div class="nav-item ">
+                        <a href="{{ route('register.tutor') }}">
+                            <i class="fe fe-edit-2 "></i>{{ __('T. Register') }} 
+                        </a>
+                    </div>
+                @endif
+
             </div>
+
             @endguest
         </div>
     </div>

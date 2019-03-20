@@ -24,6 +24,7 @@ class ConvocatoryController extends Controller
         return view('convocatory.create');
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -33,15 +34,14 @@ class ConvocatoryController extends Controller
     public function store(Request $request)
     {
         $convocatory = new Convocatory();
-        $checkConvocatory = Convocatory::whereBetween('start', array($request->start, $request->end))
-                                        ->whereBetween('end', array($request->start, $request->end))->first();
+        $this->validator($request->all())->validate();
+        $checkConvocatory = Convocatory::showActiveInput($request->start);
         if($checkConvocatory)
         {
             return back()->with('Error', 'There is already a call');
         }
         else
         {
-            $this->validator($request->all())->validate();
             $convocatory->user_id =  $request->user()->id;
             $convocatory->start = $request->start;
             $convocatory->end = $request->end;
@@ -62,6 +62,8 @@ class ConvocatoryController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

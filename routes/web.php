@@ -25,6 +25,10 @@ Route::get('/home_tutor', ['uses' => 'TutorController@index'])->name('home_tutor
 Route::get('/convocatory', ['uses' => 'ConvocatoryController@create'])->name('convocatory.create')->middleware('verified');
 Route::post('/convocatory', ['uses' => 'ConvocatoryController@store'])->name('convocatory.create')->middleware('verified');
 
+//Tutor
+Route::get('register_tutor',['uses' => 'Auth\RegisterController@showRegistrationTutorForm'])->name('register.tutor');
+Route::post('register_tutor',['uses' => 'Auth\RegisterController@registerTutor'])->name('register.tutor');
+Route::get('email/verify', 'Auth\VerificationController@showTutor')->name('verification.tutor');
 
 Auth::routes(['verify' => true]);
 

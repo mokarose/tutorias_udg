@@ -12,8 +12,25 @@
                             <div class="card-title text-center">
                                 <h4>Convocatory</h4>
                             </div>
+
                             <div class="row">
-                        
+                                
+                                @if(session()->has('success'))
+                                <div class="col-md-12 py-4">
+                                    <div class="alert alert-info" role="alert">
+                                        {{ session()->get('success') }}
+                                    </div>
+                                    </div>
+                                @endif
+                                
+                                @if(session()->has('Error'))
+                                    <div class="col-md-12 py-4">
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session()->get('Error') }}
+                                        </div>
+                                    </div>
+                                @endif
+                                
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="start" class="col-form-label">{{ __('Date to start') }}</label>
@@ -68,24 +85,6 @@
                                             {{ __('Save') }}
                                     </button>
                                 </div>
-                                
-                            
-                                @if(session()->has('success'))
-                                    <div class="col-md-12 py-4">
-                                        <div class="alert alert-info" role="alert">
-                                            {{ session()->get('success') }}
-                                        </div>
-                                    </div>
-                                @endif
-                                
-                                @if(session()->has('Error'))
-                                    <div class="col-md-12 py-4">
-                                        <div class="alert alert-danger" role="alert">
-                                            {{ session()->get('Error') }}
-                                        </div>
-                                    </div>
-                                @endif
-
 
                             </div>
                         
