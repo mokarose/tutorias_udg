@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Convocatory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -60,37 +61,19 @@ class RegisterController extends Controller
     public function registerTutor(Request $request)
     {
         $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
+        event(new Registered($user = $this->createTutor($request->all())));
         return back()->with('Registered', 'You have registered as a tutor, the administrator confirms your request');
+        
+        
     }
     
-    public function redirectTo()
-    {
-        // User role
-        $role = Auth::user()->role; 
-        
-        // Check user role
-        switch ($role) 
-        {
-            case 'admin':
-                    return route('home_admin');
-                break;
-            case 'tutor':
-                    return route('home_tutor');
-                break; 
-            default:
-                    return route('home_student'); 
-                break;
-        }
-    }
 
     public function showRegistrationTutorForm()
     {
-        if(Convocatory::ShowActive())
+        $convocatory = Convocatory::ShowActive();
+        if($convocatory)
         {
-            return view('auth.register_tutor');
+            return view('auth.register');
         }
         else
         {
@@ -114,6 +97,16 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected function validatorTutor(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'id_convocatory' => ['required', 'number', 'exists:convocatories']
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -122,10 +115,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => bcrypt($data['password']),
         ]);
+        $user
+            ->roles()
+            ->attach(Role::where('name', 'student')->first());
+        return $user;
+    }
+
+    protected function createTutor(array $data)
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        $user
+            ->roles()
+            ->attach(Role::where('name', 'tutor')->first());
+        $user
+            ->convocatories()
+            ->attach(Convocatory::where('id', $data['convocatory_id'])->first());
+        return $user;
     }
 }

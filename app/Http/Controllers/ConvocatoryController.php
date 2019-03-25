@@ -16,12 +16,13 @@ class ConvocatoryController extends Controller
      */
     public function index()
     {
-        //
+        $convocatories = Convocatory::orderBy('start', "DESC")->get();
+        return view('convocatories.convocatoryIndex', compact('convocatories'));
     }
 
     public function create()
     {
-        return view('convocatory.create');
+        return view('convocatories.convocatoryForm');
     }
 
 
@@ -33,9 +34,10 @@ class ConvocatoryController extends Controller
      */
     public function store(Request $request)
     {
+        
         $convocatory = new Convocatory();
         $this->validator($request->all())->validate();
-        $checkConvocatory = Convocatory::showActiveInput($request->start);
+        $checkConvocatory = Convocatory::where('end', ">", $request->start)->first();;
         if($checkConvocatory)
         {
             return back()->with('Error', 'There is already a call');
@@ -47,6 +49,7 @@ class ConvocatoryController extends Controller
             $convocatory->end = $request->end;
             $convocatory->written = $request->written;
             $convocatory->save();
+            
             return back()->with('success', 'Data inserted Successfully');
         }
         
@@ -58,9 +61,9 @@ class ConvocatoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Convocatory $convocatory)
     {
-        //
+        return view('convocatories.convocatoryShow', compact('convocatory'));
     }
 
     
@@ -99,6 +102,11 @@ class ConvocatoryController extends Controller
         //
     }
 
+
+    Public function user_convovatories()
+    {
+        
+    }
 
     protected function validator(array $data)
     {

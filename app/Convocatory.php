@@ -16,9 +16,10 @@ class Convocatory extends Model
         return $checkConvocatory;
     }
 
-    public static function showActiveInput($start)
+    //Users
+    public function users()
     {
-        $checkConvocatory = Convocatory::where('end', ">", $start)->first();
-       return $checkConvocatory;
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
+
 }

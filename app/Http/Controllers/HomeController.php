@@ -24,23 +24,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        // User role
-        $role = Auth::user()->role; 
-        
-        // Check user role
-        switch ($role) 
-        {
-            case 'admin':
-                    return view("root.home");
-                break;
-            case 'tutor':
-                    return view('tutor.home');
-                break; 
-            default:
-                    return view('student.home'); 
-                break;
-        }
+        $request->user()->authorizeRoles(['student', 'tutor', 'admin']);
+        return view('home');
     }
 }

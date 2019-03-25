@@ -26,11 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        view()->composer('auth.register_tutor', function($view) {
+        view()->composer('auth.register', function($view) {
             $view->with('convocatory', Convocatory::showActive());
         });
 
-        view()->composer('layouts.app', function($view) {
+        view()->composer('auth.login', function($view) {
             $view->with('convocatory', Convocatory::showActive());
         });
     }
