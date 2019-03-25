@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Convocatory;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema; //NEW: Import Schema
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,12 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-    }
-}
-use Illuminate\Support\Facades\Schema; //NEW: Import Schema
+        Schema::defaultStringLength(191);
+        view()->composer('auth.register', function($view) {
+            $view->with('convocatory', Convocatory::showActive());
+        });
 
-function boot()
-{
-    Schema::defaultStringLength(191); //NEW: Increase StringLength
+        view()->composer('auth.login', function($view) {
+            $view->with('convocatory', Convocatory::showActive());
+        });
+    }
 }

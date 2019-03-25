@@ -9,43 +9,47 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('assets/js/require.min.js') }}"></script>
 
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Styles -->
-    <link href="{{URL:: asset('assets/css/animate.css/animate.min.css') }}" rel="stylesheet">
+     <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Dashboard Core -->
-    <link href="{{ URL::asset('assets/css/dashboard.css') }}" rel="stylesheet" />
-    <script src="{{ URL::asset('assets/js/dashboard.js') }}"></script>
-    <!-- c3.js Charts Plugin -->
-    <link href="{{ URL::asset('assets/plugins/charts-c3/plugin.css') }}" rel="stylesheet" />
-    <script src="{{ URL::asset('assets/plugins/charts-c3/plugin.js') }}"></script>
-    <!-- Google Maps Plugin -->
-    <link href="{{ URL::asset('assets/plugins/maps-google/plugin.css') }}" rel="stylesheet" />
-    <script src="{{ URL::asset('assets/plugins/maps-google/plugin.js') }}"></script>
-    <!-- Input Mask Plugin -->
-    <script src="{{ URL::asset('assets/plugins/input-mask/plugin.js') }}"></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="">
-    <div class="page">
-        <div class="page-main">
-            
-            @include('layouts.menu')
-            
-            <div class="m-4"> 
-                @yield('content')
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+        @guest
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="m-5">
+                        @yield('auth')
+                    </div>
+                </div>
             </div>
-        </div> 
-        
+            
+        @else
+            <!-- Header Status-->
+            @include('layouts.header')
+            <div class="app-body">
+                <!-- Sidebar Here -->
+                @include('layouts.sidebar')
+
+                <!-- Content -->
+                <main class="main">
+                    <div class="m-5 animated fadeIn delay-.9s">
+                        @yield('content')
+                    </div>
+                </main>
+            </div>
+        @endguest
         @include('layouts.footer')
-    </div>
 </body>
 </html>
 
