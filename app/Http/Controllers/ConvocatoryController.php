@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Convocatory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
+//Email
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendTutorRequestEmail;
 
 class ConvocatoryController extends Controller
 {
@@ -74,7 +80,7 @@ class ConvocatoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Convocatory $convocatory)
     {
         //
     }
@@ -103,9 +109,37 @@ class ConvocatoryController extends Controller
     }
 
 
-    Public function user_convovatories()
+    Public function users_convovatories(Convocatory $convocatory)
+    {   
+        $tutors = $convocatory->users;
+        return view('convocatories.convocatoryTutors', compact('tutors'));
+    }
+
+    public function tutorSelected(Request $request)
     {
+        $this->validatorSelection($request->all())->validate();
+        $tutor = User::find($request->id);
+        $tutor->status = $request->flag;
+        Mail::to($tutor->email)->send(new SendTutorRequestEmail($tutor));
+        if($request->flag == 1){
+            $tutor->email_verified_at = Carbon::now();
+            $tutor->save();
+            return back()->with('Approved', 'The tutor was approved');
+        }
+        else{
+            $tutor->save();
+            return back()->with('Decline', 'The tutor was rejected');
+        }
         
+    }
+
+
+    protected function validatorSelection(array $data)
+    {
+        return Validator::make($data, [
+            'flag' => ['required', 'integer', 'digits_between:1,3'],
+            'id' => ['required', 'integer', 'exists:users']
+        ]);
     }
 
     protected function validator(array $data)

@@ -25,7 +25,7 @@
                                         <td> {{ $convocatory->start }} </td>
                                         <td> {{ $convocatory->end }} </td>
                                         <td> {{ $convocatory->written }} </td>
-                                        <td> <a  class="btn btn-info" href="#"><i class="icon-people"></i></a></td>
+                                        <td> <a  class="btn btn-info" href="{{ route('convocatory.tutors', $convocatory->id) }}"><i class="icon-people"></i></a></td>
                                         <td> <a  class="btn btn-warning" href="#"><i class="icon-pencil"></i></a> </td>
                                         <td> <a  class="btn btn-danger" href="#"><i class="icon-trash"></i></a> </td>
                                     </tr>

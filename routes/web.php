@@ -16,6 +16,8 @@ Route::get('/','HomeController@index')->name("home")->middleware('verified');
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
 //Convocatory
+Route::get('/convocatory/tutors/{convocatory}',['uses' => 'ConvocatoryController@users_convovatories'])->name('convocatory.tutors')->middleware('verified');
+Route::post('/convocatory/tutors/{user}',['uses' => 'ConvocatoryController@tutorSelected'])->name('convocatory.tutors')->middleware('verified');
 Route::resource('convocatory', 'ConvocatoryController')->middleware('verified');
 
 //Tutor
