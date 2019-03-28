@@ -8,7 +8,7 @@
                     <h3>Convocatories</h3>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered">
-                            <thead>
+                            <thead class="table-primary">
                                 <tr>
                                     <th>Id</th>
                                     <th>Start</th>
