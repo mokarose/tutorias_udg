@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableTutors extends Migration
+class CreateTutorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,6 @@ class CreateTableTutors extends Migration
     {
         Schema::create('tutors', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->string('route_picture');
             $table->string('hobby',255);
             $table->integer('cellphone');
             $table->string('career',50);
