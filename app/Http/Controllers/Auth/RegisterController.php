@@ -61,7 +61,7 @@ class RegisterController extends Controller
     public function registerTutor(Request $request)
     {
         $this->validator($request->all())->validate();
-        event(new Registered($user = $this->createTutor($request->all())));
+         $this->createTutor($request->all());
         return back()->with('Registered', 'You have registered as a tutor, the administrator confirms your request');
         
         
