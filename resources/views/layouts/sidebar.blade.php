@@ -9,30 +9,34 @@
             </li>
             
             @if(Auth::user()->hasRole('admin'))
+            <!-- Admin -->
 
-            <!-- Convocatories -->
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon icon-note"></i> Convocatories</a>
-                <ul class="nav-dropdown-items">
 
-                    <!-- Create -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('convocatory.create') }}">
-                        <i class="nav-icon icon-plus"></i> Create</a>
-                    </li>
+                <!-- Convocatories -->
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon icon-note"></i> Convocatories</a>
+                    <ul class="nav-dropdown-items">
 
-                    <!-- View -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('convocatory.index') }}">
-                        <i class="nav-icon icon-list"></i> View list</a>
-                    </li>
-                </ul>
-            </li>
+                        <!-- Create -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('convocatory.create') }}">
+                            <i class="nav-icon icon-plus"></i> Create</a>
+                        </li>
+
+                        <!-- View -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('convocatory.index') }}">
+                            <i class="nav-icon icon-list"></i> View list</a>
+                        </li>
+                    </ul>
+                </li>
 
 
                 
             @elseif(Auth::user()->hasRole('tutor'))
+            <!-- Tutor -->
             @else
+            <!-- Student -->
             @endif
 
 

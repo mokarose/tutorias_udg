@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status'
+        'name', 'email', 'password', 'avatar', 'status'
     ];
 
     /**
@@ -41,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //Roles    
     public function roles()
     {
-        return $this->belongsToMany('App\Role')->withTimestamps();
+        return $this->belongsToMany('App\Role');
     }
 
     public function authorizeRoles($roles)

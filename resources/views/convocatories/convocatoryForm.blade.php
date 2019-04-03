@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-        <div class="container animated fadeIn delay-.9s">
+        <div class="container">
             <div class="row justify-content-center m-5">
                 <div class="col-md-9">
                     <form method="POST" action="{{ route('convocatory.store') }}" class="card">

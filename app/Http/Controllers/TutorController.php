@@ -2,10 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Tutor;
 use Illuminate\Http\Request;
 
 class TutorController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +26,7 @@ class TutorController extends Controller
      */
     public function index()
     {
-        return view('tutor.home');
+        
     }
 
     /**
@@ -40,10 +53,10 @@ class TutorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tutor $tutor)
     {
         //
     }
@@ -51,10 +64,10 @@ class TutorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tutor $tutor)
     {
         //
     }
@@ -63,10 +76,10 @@ class TutorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tutor $tutor)
     {
         //
     }
@@ -74,10 +87,10 @@ class TutorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Tutor  $tutor
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tutor $tutor)
     {
         //
     }

@@ -15,7 +15,6 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
-            $table->string('route_picture');
             $table->string('hobby',255);
             $table->integer('cellphone');
             $table->string('career',50);
