@@ -23,7 +23,12 @@ Route::resource('convocatory', 'ConvocatoryController')->middleware('verified');
 //Tutor
 Route::get('register/tutor',['uses' => 'Auth\RegisterController@showRegistrationTutorForm'])->name('register.tutor');
 Route::post('register/tutor',['uses' => 'Auth\RegisterController@registerTutor'])->name('register.tutor');
-Route::get('verify/tutor', 'Auth\VerificationController@showTutor')->name('verification.tutor');
+Route::get('verify/tutor', 'Auth\VerificationController@showTutor')->name('verification.tutor')->middleware('verified');
+
+
+//Profile
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
 
 Auth::routes(['verify' => true]);
 
