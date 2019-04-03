@@ -66,7 +66,7 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            Si selecciona esta opción ya no podra revertir cambios.
+                                                                I will not be able to make changes.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <a href=""></a>
@@ -97,7 +97,7 @@
                                                             </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                            Si selecciona esta opción ya no podra revertir cambios.
+                                                                I will not be able to make changes.
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <a href=""></a>
