@@ -22,15 +22,17 @@
                         <hr>
                         <div class="row">
                                 <div class="col-md-4">
-                                    <button class="btn btn-success btn-block">Change Photo</button>
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-primary btn-block">Edit profile</button>
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-warning btn-block">X</button>
+                                    <button class="btn btn-success btn-block">Change Photo</button>
                                 </div>
                         </div>
+
+
+                        
                     </div>
 
                     
