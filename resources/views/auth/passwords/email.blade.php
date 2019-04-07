@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="form-group mb-0">
-                        <a class="btn btn-danger btn-block" href="{{ route('login') }}"> {{ __('Back') }}</a>
+                        <a class="btn btn-secondary btn-block" href="{{ route('login') }}"> {{ __('Back To Login') }}</a>
                         <button type="submit" class="btn btn-primary btn-block">
                                 {{ __('Send Password Reset Link') }}
                         </button>
