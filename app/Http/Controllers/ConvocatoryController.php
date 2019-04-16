@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Convocatory;
 use Carbon\Carbon;
+use App\Convocatory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,14 +20,16 @@ class ConvocatoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['admin']);   
         $convocatories = Convocatory::orderBy('start', "DESC")->get();
         return view('convocatories.convocatoryIndex', compact('convocatories'));
     }
 
     public function create()
     {
+        $request->user()->authorizeRoles(['admin']);
         return view('convocatories.convocatoryForm');
     }
 
@@ -40,7 +42,7 @@ class ConvocatoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->user()->authorizeRoles(['admin']);   
         $convocatory = new Convocatory();
         $this->validator($request->all())->validate();
         $checkConvocatory = Convocatory::where('end', ">", $request->start)->first();;
@@ -67,8 +69,9 @@ class ConvocatoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatory $convocatory)
+    public function show(Request $request, Convocatory $convocatory)
     {
+        $request->user()->authorizeRoles(['student', 'tutor', 'admin']);
         return view('convocatories.convocatoryShow', compact('convocatory'));
     }
 
@@ -80,9 +83,9 @@ class ConvocatoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatory $convocatory)
+    public function edit(Request $request, Convocatory $convocatory)
     {
-        //
+        $request->user()->authorizeRoles(['admin']);
     }
 
     /**
@@ -92,9 +95,9 @@ class ConvocatoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Convocatory $convocatory)
     {
-        //
+        $request->user()->authorizeRoles(['admin']);
     }
 
     /**
@@ -105,18 +108,20 @@ class ConvocatoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request->user()->authorizeRoles(['admin']);
     }
 
 
-    Public function users_convovatories(Convocatory $convocatory)
+    Public function users_convovatories(Request $request, Convocatory $convocatory)
     {   
+        $request->user()->authorizeRoles(['student', 'tutor', 'admin']);
         $tutors = $convocatory->users;
         return view('convocatories.convocatoryTutors', compact('tutors'));
     }
 
     public function tutorSelected(Request $request)
     {
+        $request->user()->authorizeRoles(['admin']);
         $this->validatorSelection($request->all())->validate();
         $tutor = User::find($request->id);
         $tutor->status = $request->flag;

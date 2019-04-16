@@ -88,4 +88,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany('App\Convocatory')->withTimestamps();
     }
+
+    //Profile
+    public function profile()
+    {
+        return $this->HasOne('App\Profile');
+    }
 }

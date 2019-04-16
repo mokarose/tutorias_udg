@@ -19,7 +19,7 @@
                     {{ Auth::user()->name }}<br>
                     <small class="text-muted">{{ Auth::user()->email }}</small>
                 </a>
-                <a class="dropdown-item" href="{{ route('profile') }}">
+                <a class="dropdown-item" href="{{ route('profile.index') }}">
                     <i class="fas fa-user"></i> Profile
                 </a>
                 <div class="divider"></div>

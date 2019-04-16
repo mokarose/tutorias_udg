@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Convocatory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //NEW: Import Schema
 
@@ -32,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('auth.login', function($view) {
             $view->with('convocatory', Convocatory::showActive());
+        });
+
+        view()->composer('home', function($view) {
+            $view->with('profile', Auth::user()->profile);
         });
     }
 }

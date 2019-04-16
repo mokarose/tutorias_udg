@@ -27,8 +27,7 @@ Route::get('verify/tutor', 'Auth\VerificationController@showTutor')->name('verif
 
 
 //Profile
-Route::get('/profile', 'ProfileController@index')->name('profile');
-
+Route::resource('profile', 'ProfileController')->middleware('verified');
 
 Auth::routes(['verify' => true]);
 
