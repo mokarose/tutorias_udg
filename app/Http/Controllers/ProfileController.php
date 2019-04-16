@@ -39,8 +39,7 @@ class ProfileController extends Controller
         $user = User::find($request->user_id);
         $this->validatorProfile($request->all())->validate();
         if(isset($request->avatar)){
-            $request->avatar->move(public_path('assets/images/avatars'), $request->user()->id.'.'.$request->avatar->getClientOriginalExtension());
-            $user->avatar = 'assets/images/avatars/'.$request->user()->id.'.'.$request->avatar->getClientOriginalExtension();
+            $user->avatar = $request->file('avatar')->storeAs('public/avatars', $request->user()->id.'.'.$request->avatar->getClientOriginalExtension());
             $user->save();
         }
         if($user->name != $request->name){
@@ -57,19 +56,13 @@ class ProfileController extends Controller
         $user = User::find($request->user_id);
         $this->validatorEditProfile($request->all())->validate();
         if(isset($request->avatar)){
-            $request->avatar->move(public_path('assets/images/avatars'), $request->user()->id.'.'.$request->avatar->getClientOriginalExtension());
-            $user->avatar = 'assets/images/avatars/'.$request->user()->id.'.'.$request->avatar->getClientOriginalExtension();
+            $user->avatar = $request->file('avatar')->storeAs('public/avatars', $request->user()->id.'.'.$request->avatar->getClientOriginalExtension());
             $user->save();
         }
         if($user->name != $request->name){
             $user->name = $request->name;
             $user->save();
         }
-        /*$profile->date = $request->date;
-        $profile->about_me = $request->about_me;
-        $profile->cellphone = $request->cellphone;
-        $profile->career = $request->career;
-        $profile->G = $request->G;*/
         $profile->fill($request->all())->save();
         return back()->with('success','You have successfully updated the profile.');
     }
