@@ -112,13 +112,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-graduation"></i></span>
                     </div>
-                    <input id="career" type="text"
-                        class="form-control{{ $errors->has('career') ? ' is-invalid' : '' }}" name="career"
-                        value="{{ isset($profile->career) ? $profile->career : old('career') }}" placeholder="Career" required autofocus>
+                    <select name="career_id" id="career_id" class="form-control{{ $errors->has('career_id') ? ' is-invalid' : '' }}">
+                        <option value=""></option>
+                        @foreach ($careers as $career)
+                            <option value="{{ $career->id }}" {{ isset($profile) ? $profile->career_id == $career->id ? 'selected' : '' : '' }}>{{ $career->name }}</option>
+                        @endforeach
+                    </select>
 
-                    @if ($errors->has('career'))
+                    @if ($errors->has('career_id"'))
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('career') }}</strong>
+                        <strong>{{ $errors->first('career_id"') }}</strong>
                     </span>
                     @endif
                 </div>

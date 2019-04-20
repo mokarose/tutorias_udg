@@ -75,7 +75,7 @@
                                 </div>
 
                                 <div class="col-md-5">
-                                    <a href="{{ route('home') }}" class="btn btn-danger btn-block">
+                                    <a href="{{ route('convocatory.index') }}" class="btn btn-danger btn-block">
                                             {{ __('Cancel') }}
                                     </a>
                                 </div>

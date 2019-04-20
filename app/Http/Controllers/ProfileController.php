@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Career;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,12 +27,14 @@ class ProfileController extends Controller
 
     public function edit(Profile $profile)
     {
-        return view('profiles.profileForm', compact('profile'));
+        $careers = Career::all();
+        return view('profiles.profileForm', compact('profile', 'careers'));
     }
 
     public function create()
     {
-        return view('profiles.profileForm');
+        $careers = Career::all();
+        return view('profiles.profileForm', compact('careers'));
     }
 
     public function store(Request $request)
@@ -75,8 +78,10 @@ class ProfileController extends Controller
             'name' => ['string', 'min:5', 'max:100'],
             'date' => ['required', 'before:13 years ago'],
             'about_me' => ['required', 'string', 'min:10', 'max:255'],
+            'career_id' => ['required', 'exists:careers,id'],
             'cellphone' => ['required', 'string', 'min:10', 'max:15'],
-            'G' => ['required', 'string', 'min:1', 'max:1']
+            'G' => ['required', 'string', 'min:1', 'max:1'],
+            'user_id' => ['required', 'exists:users,id']
         ]);
     }
 
@@ -88,7 +93,9 @@ class ProfileController extends Controller
             'date' => ['before:13 years ago'],
             'about_me' => ['string', 'min:10', 'max:255'],
             'cellphone' => ['string', 'min:10', 'max:15'],
-            'G' => ['string', 'min:1', 'max:1']
+            'career_id' => ['required', 'exists:careers,id'],
+            'G' => ['string', 'min:1', 'max:1'],
+            'user_id' => ['required', 'exists:users,id']
         ]);
     }
 }

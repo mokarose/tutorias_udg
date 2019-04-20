@@ -31,6 +31,64 @@
                     </ul>
                 </li>
 
+                <!-- Divisions -->
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon icon-calculator"></i> Divisions</a>
+                    <ul class="nav-dropdown-items">
+
+                        <!-- Create -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('division.create') }}">
+                            <i class="nav-icon icon-plus"></i> Create</a>
+                        </li>
+
+                        <!-- View -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('division.index') }}">
+                            <i class="nav-icon icon-list"></i> View list</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Divisions -->
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon icon-notebook"></i> Careers</a>
+                    <ul class="nav-dropdown-items">
+
+                        <!-- Create -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('career.create') }}">
+                            <i class="nav-icon icon-plus"></i> Create</a>
+                        </li>
+
+                        <!-- View -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('career.index') }}">
+                            <i class="nav-icon icon-list"></i> View list</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- Divisions -->
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon icon-note"></i> Modules</a>
+                    <ul class="nav-dropdown-items">
+
+                        <!-- Create -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('module.create') }}">
+                            <i class="nav-icon icon-plus"></i> Create</a>
+                        </li>
+
+                        <!-- View -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('module.index') }}">
+                            <i class="nav-icon icon-list"></i> View list</a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 
             @elseif(Auth::user()->hasRole('tutor'))
