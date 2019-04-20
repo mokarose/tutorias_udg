@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        @if (count($convocatories) > 0)
+        @if (isset($convocatories))
             <div class="row justify-content-center">
                 <div class="col-9 text-center">
                     <h3>Convocatories</h3>

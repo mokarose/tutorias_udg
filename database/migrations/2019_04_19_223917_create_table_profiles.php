@@ -18,13 +18,15 @@ class CreateTableProfiles extends Migration
             $table->date('date');
             $table->string('about_me');
             $table->string('cellphone', 15);
-            $table->string('career');
+            $table->integer('career_id')->unsigned();
             $table->string('G');
             $table->timestamps();
         });
 
         Schema::table('profiles', function($table) {
             $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade');
+            $table->foreign('career_id')->references('id')->on('careers')
             ->onUpdate('cascade');
         });
     }

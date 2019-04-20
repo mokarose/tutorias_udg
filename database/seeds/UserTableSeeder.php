@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
         $user->name = 'Admin';
         $user->email = 'administrator@administrator.com';
         $user->password = bcrypt('udg123');
-        $user->avatar = 'assets/images/utility/user.png';
+        $user->avatar = 'public/avatars/user.png';
         $user->status = 1;
         $user->email_verified_at = '2019-03-05 06:01:06';
         $user->save();
