@@ -14,4 +14,9 @@ class Division extends Model
     {
         return $this->hasMany('App\Career');
     }
+
+    public function modules()
+    {
+        return $this->hasMany('App\Module');
+    }
 }

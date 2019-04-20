@@ -35,6 +35,9 @@ Route::resource('division', 'DivisionController')->middleware('verified');
 //Career
 Route::resource('career', 'CareerController')->middleware('verified');
 
+//Module
+Route::resource('module', 'ModuleController')->middleware('verified');
+
 Auth::routes(['verify' => true]);
 
 
